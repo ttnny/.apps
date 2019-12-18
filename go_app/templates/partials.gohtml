@@ -46,3 +46,17 @@
     </body>
     </html>
 {{end}}
+
+{{define "errors"}}
+    <div class="alert alert-danger" role="alert">
+        <h3>Error(s):</h3>
+        <hr>
+        <li>(in the order of their occurrence)
+            {{range .}}
+                <ul>
+                    <li>{{.Errors}}</li>
+                </ul>
+            {{end}}
+        </li>
+    </div>
+{{end}}
