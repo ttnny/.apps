@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/top :: head"><title>(top fragments -> head)</title></head>
+
+<body>
+<nav th:replace="fragments/top :: nav"></nav>
+
+<div class="album py-4 bg-light">
+    <div class="container">
+        <h1>GitHub Language Statistics
+            <span class="ml-2"><a href="//github.com/ttnny/github-lcs" target="_blank"><i
+                    class="fab fa-github text-dark"></i></a></span>
+        </h1>
+        <p class="pt-3">Please input your GitHub username:</p>
+        <form action="/gh-langstats" method="POST">
+            <div class="input-group mb-3 form-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">GitHub</span>
+                </div>
+                <input type="text" name="username" class="form-control ttnny-input" placeholder="GitHub username"
+                       value="{{.Username}}" required>
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="submit">Go</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i> The value shown for each language is the <u>number of bytes of code</u>
+            written in that language. The results are based on 100 (max) of the most pushed/updated public repos.
+        </div>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-pills justify-content-center py-3" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active btn-outline-secondary" data-toggle="tab" href="#barChart" role="tab" aria-controls="Bar" aria-selected="true">Bar Chart</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link btn-outline-secondary" data-toggle="tab" href="#pieChart" role="tab" aria-controls="Pie" aria-selected="false">Pie Chart</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="barChart" role="tabpanel" aria-labelledby="Bar">
+                <div id="myBarChart"></div>
+            </div>
+            <div class="tab-pane" id="pieChart" role="tabpanel" aria-labelledby="Pie">
+                <div id="myPieChart"></div>
+            </div>
+        </div>
+
+        <div th:if="">
+            <script src="https://cdn.jsdelivr.net/npm/frappe-charts@1.2.4/dist/frappe-charts.min.iife.js"></script>
+            <script>
+                const data = {
+                    labels: {{.Langs}},
+                datasets: [
+                    {
+                        name: "GitHub Language Statistics",
+                        values: {{.Stats}},
+                }
+                ],
+                };
+
+                let barChart = new frappe.Chart("#myBarChart", {
+                    data: data,
+                    type: "bar",
+                    height: 450,
+                    colors: ["#807dba", "#c3e9b0", "#cca682", "#71c2ba",
+                        "#6edff1", "#2b8cbe", "#0868ac", "#084081",
+                        "#fcc5c0", "#f768a1", "#dd3497", "#fed976",
+                        "#fd8d3c", "#fc4e2a", "#dadaeb", "#99c4f3"],
+
+                    tooltipOptions: {
+                        formatTooltipY: d => d + " bytes",
+                    }
+                });
+
+                let pieChart = new frappe.Chart("#myPieChart", {
+                    data: data,
+                    type: "pie",
+                    height: 450,
+                    maxSlices: 7,
+                    colors: ["#cca682", "#c3e9b0", "#99c4f3", "#71c2ba",
+                        "#6edff1", "#2b8cbe", "#0868ac", "#084081",
+                        "#fcc5c0", "#f768a1", "#dd3497", "#fed976",
+                        "#fd8d3c", "#fc4e2a", "#dadaeb", "#807dba"],
+
+                    tooltipOptions: {
+                        formatTooltipY: d => d + " bytes",
+                    }
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/bottom :: js">(bottom fragments -> js)</div>
+</body>
+</html>
