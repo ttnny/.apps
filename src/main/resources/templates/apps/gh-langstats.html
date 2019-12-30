@@ -15,10 +15,10 @@
         <div class="bd-callout bd-callout-primary">
             <dl>
                 <dt>App Info <i class="fas fa-info-circle"></i></dt>
-                <dd>This application is to demo the use of the gh-langstats API.</dd>
+                <dd>This application is to demo the use of the <u>gh-langstats</u> API.</dd>
 
                 <dt>Usage</dt>
-                <dd>The gh-langstats takes in a GitHub username and returns a JSON...</dd>
+                <dd>The demo takes a GitHub username and returns a JSON of language/bytes (key/value) pairs.</dd>
 
                 <dt>Notes</dt>
                 <dd>The value shown for each language is the <u>number of bytes of code</u>
@@ -27,20 +27,19 @@
         </div>
 
         <p class="pt-3">Please input your GitHub username:</p>
-        <form action="/gh-langstats" method="POST">
+        <form th:action="@{/gh-langstats}" th:object="${ghLangStatsModel}" action="#" method="post">
             <div class="input-group mb-3 form-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">GitHub</span>
                 </div>
-                <input type="text" name="username" class="form-control ttnny-input" placeholder="GitHub username"
-                       value="username" required>
+                <input th:field="*{username}" type="text" class="form-control ttnny-input" placeholder="GitHub username" required>
                 <div class="input-group-append">
                     <button class="btn btn-success" type="submit">Go</button>
                 </div>
             </div>
         </form>
 
-        <th:block th:if="${errors != null}">
+        <th:block th:if="*{ghLangStatsModel.labels != null and ghLangStatsModel.values != null}">
         <!-- Nav tabs -->
         <ul class="nav nav-pills justify-content-center py-3" id="myTab" role="tablist">
             <li class="nav-item">
@@ -64,11 +63,11 @@
         <script src="https://cdn.jsdelivr.net/npm/frappe-charts@1.2.4/dist/frappe-charts.min.iife.js"></script>
         <script th:inline="javascript">
             const data = {
-                labels: [[${langStats.getLabels()}]],
+                labels: [[${ghLangStatsModel.labels}]],
                 datasets: [
                     {
                         name: "GitHub Language Statistics",
-                        values: [[${langStats.getValues()}]],
+                        values: [[${ghLangStatsModel.values}]],
                     }
                 ],
             };
