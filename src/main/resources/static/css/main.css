@@ -18,8 +18,30 @@
     height: auto;
 }
 
-.alert-info {
-    display: inline-block;
+.bd-callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #eee;
+    border-left-width: .25rem;
+    border-radius: .25rem;
+    background: #ffffff;
+}
+
+.bd-callout-primary {
+    border-left-color: #007bff;
+}
+
+.bd-callout p:last-child {
+    margin-bottom: 0;
+}
+
+.bd-callout dl {
+    margin-bottom: 0;
+}
+
+.bd-callout dl dd:last-child {
+    margin-bottom: 0;
 }
 
 i.fa-github:hover {

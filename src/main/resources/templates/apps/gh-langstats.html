@@ -3,7 +3,7 @@
 <head th:replace="fragments/top :: head"><title>(top fragments -> head)</title></head>
 
 <body>
-<nav th:replace="fragments/top :: nav"></nav>
+<nav th:replace="fragments/top :: nav">(top fragments -> nav)</nav>
 
 <div class="album py-4 bg-light">
     <div class="container">
@@ -11,6 +11,21 @@
             <span class="ml-2"><a href="//github.com/ttnny/github-lcs" target="_blank"><i
                     class="fab fa-github text-dark"></i></a></span>
         </h1>
+
+        <div class="bd-callout bd-callout-primary">
+            <dl>
+                <dt>App Info <i class="fas fa-info-circle"></i></dt>
+                <dd>This application is to demo the use of the gh-langstats API.</dd>
+
+                <dt>Usage</dt>
+                <dd>The gh-langstats takes in a GitHub username and returns a JSON...</dd>
+
+                <dt>Notes</dt>
+                <dd>The value shown for each language is the <u>number of bytes of code</u>
+                    written in that language. The results are based on 100 (max) of the most pushed/updated public repos.</dd>
+            </dl>
+        </div>
+
         <p class="pt-3">Please input your GitHub username:</p>
         <form action="/gh-langstats" method="POST">
             <div class="input-group mb-3 form-group">
@@ -18,18 +33,14 @@
                     <span class="input-group-text">GitHub</span>
                 </div>
                 <input type="text" name="username" class="form-control ttnny-input" placeholder="GitHub username"
-                       value="{{.Username}}" required>
+                       value="username" required>
                 <div class="input-group-append">
                     <button class="btn btn-success" type="submit">Go</button>
                 </div>
             </div>
         </form>
 
-        <div class="alert alert-info">
-            <i class="fas fa-info-circle"></i> The value shown for each language is the <u>number of bytes of code</u>
-            written in that language. The results are based on 100 (max) of the most pushed/updated public repos.
-        </div>
-
+        <th:block th:if="${errors != null}">
         <!-- Nav tabs -->
         <ul class="nav nav-pills justify-content-center py-3" id="myTab" role="tablist">
             <li class="nav-item">
@@ -50,49 +61,48 @@
             </div>
         </div>
 
-        <div th:if="">
-            <script src="https://cdn.jsdelivr.net/npm/frappe-charts@1.2.4/dist/frappe-charts.min.iife.js"></script>
-            <script>
-                const data = {
-                    labels: {{.Langs}},
+        <script src="https://cdn.jsdelivr.net/npm/frappe-charts@1.2.4/dist/frappe-charts.min.iife.js"></script>
+        <script th:inline="javascript">
+            const data = {
+                labels: [[${langStats.getLabels()}]],
                 datasets: [
                     {
                         name: "GitHub Language Statistics",
-                        values: {{.Stats}},
-                }
+                        values: [[${langStats.getValues()}]],
+                    }
                 ],
-                };
+            };
 
-                let barChart = new frappe.Chart("#myBarChart", {
-                    data: data,
-                    type: "bar",
-                    height: 450,
-                    colors: ["#807dba", "#c3e9b0", "#cca682", "#71c2ba",
-                        "#6edff1", "#2b8cbe", "#0868ac", "#084081",
-                        "#fcc5c0", "#f768a1", "#dd3497", "#fed976",
-                        "#fd8d3c", "#fc4e2a", "#dadaeb", "#99c4f3"],
+            let barChart = new frappe.Chart("#myBarChart", {
+                data: data,
+                type: "bar",
+                height: 450,
+                colors: ["#99c4f3", "#c3e9b0", "#cca682", "#71c2ba",
+                    "#6edff1", "#2b8cbe", "#0868ac", "#084081",
+                    "#fcc5c0", "#f768a1", "#dd3497", "#fed976",
+                    "#fd8d3c", "#fc4e2a", "#dadaeb", "#807dba"],
 
-                    tooltipOptions: {
-                        formatTooltipY: d => d + " bytes",
-                    }
-                });
+                tooltipOptions: {
+                    formatTooltipY: d => d + " bytes",
+                }
+            });
 
-                let pieChart = new frappe.Chart("#myPieChart", {
-                    data: data,
-                    type: "pie",
-                    height: 450,
-                    maxSlices: 7,
-                    colors: ["#cca682", "#c3e9b0", "#99c4f3", "#71c2ba",
-                        "#6edff1", "#2b8cbe", "#0868ac", "#084081",
-                        "#fcc5c0", "#f768a1", "#dd3497", "#fed976",
-                        "#fd8d3c", "#fc4e2a", "#dadaeb", "#807dba"],
+            let pieChart = new frappe.Chart("#myPieChart", {
+                data: data,
+                type: "pie",
+                height: 450,
+                maxSlices: 7,
+                colors: ["#cca682", "#c3e9b0", "#99c4f3", "#71c2ba",
+                    "#807dba", "#fd8d3c", "#0868ac", "#084081",
+                    "#fcc5c0", "#f768a1", "#dd3497", "#fed976",
+                    "#2b8cbe", "#fc4e2a", "#dadaeb", "#6edff1"],
 
-                    tooltipOptions: {
-                        formatTooltipY: d => d + " bytes",
-                    }
-                });
-            </script>
-        </div>
+                tooltipOptions: {
+                    formatTooltipY: d => d + " bytes",
+                }
+            });
+        </script>
+        </th:block>
     </div>
 </div>
 
