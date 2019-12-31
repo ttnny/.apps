@@ -9,4 +9,9 @@ public class IndexController {
     private String index() {
         return "index";
     }
+
+    @RequestMapping("/info")
+    private String info() {
+        return "info";
+    }
 }

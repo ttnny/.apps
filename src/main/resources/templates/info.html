@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/top :: head"><title>(top fragments -> head)</title></head>
+
+<body>
+<nav th:replace="fragments/top :: nav"></nav>
+
+<div class="album py-5 bg-light">
+    <div class="container">
+        (composing...)
+    </div>
+</div>
+
+<div th:replace="fragments/bottom :: js">(bottom fragments -> js)</div>
+</body>
+</html>
