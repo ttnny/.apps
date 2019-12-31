@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/top :: head"><title>(top fragments -> head)</title></head>
+
+<body>
+<nav th:replace="fragments/top :: nav">(top fragments -> nav)</nav>
+
+<div class="album py-4 bg-light">
+    <div class="container">
+        <h1>GitHub Contribution Graph
+            <span class="ml-2"><a href="//github.com/ttnny/github-lcs" target="_blank"><i
+                    class="fab fa-github text-dark"></i></a></span>
+        </h1>
+
+        <div class="bd-callout bd-callout-primary">
+            <dl>
+                <dt>App Info <i class="fas fa-info-circle"></i></dt>
+                <dd>This application is to demo the use of the <u>gh-ctbngraph</u> API.</dd>
+
+                <dt>Usage</dt>
+                <dd>The demo takes a GitHub username and returns a SVG of GitHub contribution graph (heatmap).</dd>
+
+                <dt>Notes</dt>
+                <dd>The graph will include/exclude the contributions to private repos depending on your GitHub privacy setting.</dd>
+            </dl>
+        </div>
+
+        <p class="pt-3">Please input your GitHub username:</p>
+        <form th:action="@{/gh-ctbngraph}" th:object="${ghCtbnGraphModel}" action="#" method="post">
+            <div class="input-group mb-3 form-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">GitHub</span>
+                </div>
+                <input th:field="*{username}" type="text" class="form-control ttnny-input" placeholder="GitHub username" required>
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="submit">Go</button>
+                </div>
+            </div>
+        </form>
+
+        <th:block th:if="${hasErrors == false}">
+            <div class="pt-4">
+                <img th:src="${ghCtbnGraphModel.svgURL}" src="#" class="img-fluid" alt="GitHub Contribution Graph" width="100%">
+            </div>
+        </th:block>
+    </div>
+</div>
+
+<div th:replace="fragments/bottom :: js">(bottom fragments -> js)</div>
+</body>
+</html>
