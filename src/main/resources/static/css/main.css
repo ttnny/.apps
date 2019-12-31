@@ -47,3 +47,7 @@
 i.fa-github:hover {
     color: #6c757d !important;
 }
+
+body {
+    background: #f8f9fa;
+}
