@@ -30,9 +30,9 @@ public class GhLangStatsController {
 
         // Calculate langstats
         String username = ghLangStatsModel.getUsername();
-
-        ghLangStatsModel.setLabels(service.getLabels(username));
-        ghLangStatsModel.setValues(service.getValues(username));
+        service.getLangStats(username);
+        ghLangStatsModel.setLabels(service.getLabels());
+        ghLangStatsModel.setValues(service.getValues());
 
         return "apps/gh-langstats";
     }

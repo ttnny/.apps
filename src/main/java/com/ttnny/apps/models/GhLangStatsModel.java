@@ -3,7 +3,7 @@ package com.ttnny.apps.models;
 public class GhLangStatsModel {
     private String username;
     private String[] labels;
-    private long[] values;
+    private Long[] values;
 
     public String getUsername() {
         return username;
@@ -21,11 +21,11 @@ public class GhLangStatsModel {
         this.labels = labels;
     }
 
-    public long[] getValues() {
+    public Long[] getValues() {
         return values;
     }
 
-    public void setValues(long[] values) {
+    public void setValues(Long[] values) {
         this.values = values;
     }
 }
