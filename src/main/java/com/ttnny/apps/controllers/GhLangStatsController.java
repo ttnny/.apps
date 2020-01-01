@@ -14,7 +14,7 @@ public class GhLangStatsController {
         this.service = service;
     }
 
-    @GetMapping("/gh-langstats")
+    @GetMapping("gh-langstats")
     public String getGhLangStats(Model model) {
         // Set title of the page
         model.addAttribute("title", "GitHub Language Chart :: Tony's Spacetime");
@@ -23,7 +23,7 @@ public class GhLangStatsController {
         return "apps/gh-langstats";
     }
 
-    @PostMapping("/gh-langstats")
+    @PostMapping("gh-langstats")
     public String postGhLangStats(Model model, @ModelAttribute GhLangStatsModel ghLangStatsModel) {
         // Set title of the page
         model.addAttribute("title", "GitHub Language Chart :: Tony's Spacetime");

@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class IndexController {
-    @RequestMapping(path = {"", "/"})
+    @RequestMapping("/*")
     private String index() {
         return "index";
     }
 
-    @RequestMapping("/info")
+    @RequestMapping("info")
     private String info() {
         return "info";
     }

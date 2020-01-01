@@ -9,13 +9,13 @@
     <div class="container">
         <div class="card-deck">
             <div class="card mb-4 shadow-sm">
-                <img class="card-img-top" src="images/gh-langstats.png" alt="GitHub Language Chart">
+                <img th:src="@{/images/gh-langstats.png}" class="card-img-top" src="images/gh-langstats.png" alt="GitHub Language Chart">
                 <div class="card-body">
                     <p class="card-text">A missing GitHub API to generate a chart (bar or pie) of programming
                         languages used in the public repositories.</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <a role="button" href="gh-langstats"
+                            <a role="button" href="gh-langstats/"
                                class="btn btn-sm btn-outline-secondary">Try
                                 it</a>
                             <a role="button" href="//github.com/ttnny/github-lcs" target="_blank"
@@ -26,14 +26,14 @@
                 </div>
             </div>
             <div class="card mb-4 shadow-sm">
-                <img class="card-img-top" src="images/gh-ctbngraph.png"
+                <img th:src="@{/images/gh-ctbngraph.png}" class="card-img-top" src="images/gh-ctbngraph.png"
                      alt="GitHub Contribution Graph">
                 <div class="card-body">
                     <p class="card-text">A missing GitHub API to get a graph of contributions (heatmap) on
                         GitHub. It can also include activities from private repos.</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <a role="button" href="gh-ctbngraph"
+                            <a role="button" href="gh-ctbngraph/"
                                class="btn btn-sm btn-outline-secondary">Try
                                 it</a>
                             <a role="button" href="//github.com/ttnny/github-lcs" target="_blank"
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="card mb-4 shadow-sm">
-                <img class="card-img-top" src="images/app.png"
+                <img th:src="@{/images/app.png}" class="card-img-top" src="images/app.png"
                      alt="GitHub Contribution Graph">
                 <div class="card-body">
                     <p class="card-text">More to come... Learning-by-doing, I usually have the API implemented first then

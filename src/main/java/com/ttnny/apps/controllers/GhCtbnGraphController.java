@@ -17,7 +17,7 @@ public class GhCtbnGraphController {
         this.service = service;
     }
 
-    @GetMapping("/gh-ctbngraph")
+    @GetMapping("gh-ctbngraph")
     public String getGhCtbnGraph(Model model) {
         // Set title of the page
         model.addAttribute("title", "GitHub Contribution Graph :: Tony's Spacetime");
@@ -26,7 +26,7 @@ public class GhCtbnGraphController {
         return "apps/gh-ctbngraph";
     }
 
-    @PostMapping("/gh-ctbngraph")
+    @PostMapping("gh-ctbngraph")
     public String postGhCtbnGraph(Model model, @ModelAttribute GhCtbnGraphModel ghCtbnGraphModel) {
         // Set title of the page
         model.addAttribute("title", "GitHub Contribution Graph :: Tony's Spacetime");
