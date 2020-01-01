@@ -27,7 +27,7 @@
         </div>
 
         <p class="pt-3">Please input your GitHub username:</p>
-        <form th:action="@{/gh-langstats}" th:object="${ghLangStatsModel}" action="#" method="post">
+        <form th:object="${ghLangStatsModel}" action="gh-langstats/" method="post">
             <div class="input-group mb-3 form-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">GitHub</span>
